@@ -1,4 +1,4 @@
-import { Box, Button, styled } from "@ignite-ui/react";
+import { Box, Button, styled, Text } from "@ignite-ui/react";
 
 export const Form = styled(Box, {
   display: 'grid',
@@ -13,5 +13,13 @@ export const Form = styled(Box, {
 
   [`> ${Button}`]: {
     borderRadius: '8px'
+  }
+});
+
+export const FormAnnotation = styled('div', {
+  marginTop: '$2',
+
+  [`> ${Text}`]: {
+    color: '$gray400',
   }
 })

@@ -7,7 +7,7 @@ const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
 
 import previewImage from '../../assets/app-preview.png'
 import Image from 'next/image'
-import { ClaimUsernameForm } from './components/ClaimUsernameForm'
+import { ClaimUserNameForm } from './components/ClaimUserNameForm'
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
 
             <Text size="lg">Conecte seu calendário e permita que as pessoas marquem agendamentos no seu tempo livre.</Text>
 
-            <ClaimUsernameForm />
+            <ClaimUserNameForm />
           </Hero>
 
           <Preview>
