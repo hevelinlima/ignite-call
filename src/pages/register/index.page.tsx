@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { api } from "@/src/lib/axios";
 
 const registerFormSchema = z.object({
   username: z.string()
@@ -38,7 +39,15 @@ export default function Register() {
   }, [router.query?.username, setValue])
 
   async function handleRegister(data: RegisterFormData) {
-    console.log(data)
+    try {
+      await api.post('/users', {
+        username: data.username, 
+        name: data.name
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return(
