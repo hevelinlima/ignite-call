@@ -1,5 +1,6 @@
 import { prisma } from '@/src/lib/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { setCookie } from 'nookies'
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,11 +13,28 @@ export default async function handler(
 
   const { username, name } = req.body
 
+  const userExists = await prisma.user.findUnique({
+    where: {
+      username,
+    }
+  })
+
+  if (userExists) {
+    return res.status(400).json({
+      message: 'User already taken.'
+    })
+  }
+
   const user = await prisma.user.create({
     data: {
       username,
       name
     },
+  })
+
+  setCookie({ res }, '@igniteCall:userId', user.id, {
+    maxAge: 60 * 60 * 24 * 7, // 7 dias
+    path: '/'
   })
 
   return res.status(201).json(user)
